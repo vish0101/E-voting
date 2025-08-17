@@ -1,0 +1,274 @@
+[
+  {
+    "ContainingType": "E_voting.Program\u002B\u003C\u003Ec",
+    "Method": "\u003CMain\u003Eb__0_5",
+    "RelativePath": "",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "E_voting.Controllers.AdminController",
+    "Method": "DeleteAdmin",
+    "RelativePath": "api/admin/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.AdminController",
+    "Method": "deleteCandidate",
+    "RelativePath": "api/admin/election/{election_id}/candidate/{candidate_id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "election_id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "candidate_id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.AdminController",
+    "Method": "addCandidate",
+    "RelativePath": "api/admin/election/{id}/candidate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "E_voting.DTO.AddCandidateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.AdminController",
+    "Method": "CreateElection",
+    "RelativePath": "api/admin/elections",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "E_voting.DTO.ElectionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.AdminController",
+    "Method": "UpdateElection",
+    "RelativePath": "api/admin/elections/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "E_voting.DTO.ElectionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.AdminController",
+    "Method": "DeleteElection",
+    "RelativePath": "api/admin/elections/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.AdminController",
+    "Method": "AdminLogin",
+    "RelativePath": "api/admin/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "E_voting.DTO.AdminLoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.AdminController",
+    "Method": "RegisterAdmin",
+    "RelativePath": "api/admin/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "E_voting.DTO.AdminRegister",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.HomeController",
+    "Method": "getAllElections",
+    "RelativePath": "api/election",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.HomeController",
+    "Method": "getElectionByID",
+    "RelativePath": "api/election/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.HomeController",
+    "Method": "GetCandidatesByElectionId",
+    "RelativePath": "api/election/{id}/candidateList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.VoterController",
+    "Method": "deleteVoter",
+    "RelativePath": "api/voter/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.VoterController",
+    "Method": "CastVote",
+    "RelativePath": "api/voter/{voterId}/vote",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "voterId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "voteDto",
+        "Type": "E_voting.DTO.CastVoteDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.VoterController",
+    "Method": "loginVoter",
+    "RelativePath": "api/voter/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDTO",
+        "Type": "E_voting.DTO.VoterLoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_voting.Controllers.VoterController",
+    "Method": "registerVoter",
+    "RelativePath": "api/voter/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerDTO",
+        "Type": "E_voting.DTO.VoterRegisterDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

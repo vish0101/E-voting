@@ -1,0 +1,131 @@
+﻿using System.ComponentModel.Design;
+using E_voting.DTO;
+using E_voting.JWT;
+using E_voting.Service;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+
+namespace E_voting.Controllers;
+
+[ApiController]
+[Route("api/admin")]
+[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+public class AdminController : ControllerBase
+{
+    private readonly IAdminService _adminService;
+    //private readonly IElectionService _electionService;
+    //private readonly ICandidateService _candidateService;
+    //private readonly IVoteService _voteService;
+
+    public AdminController(IAdminService adminService)
+    {
+        _adminService = adminService;
+        //_electionService = electionService;
+        //_candidateService = candidateService;
+        //_voteService = voteService;
+    }
+
+
+
+
+
+    // ───────────────────────────── Admin Management ─────────────────────────────
+
+    //to register admin
+    [HttpPost("register")]
+    [AllowAnonymous]
+    public async Task<IActionResult> RegisterAdmin([FromBody] AdminRegister dto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState); // This returns validation errors
+        }
+        var response = await _adminService.RegisterAdminAsync(dto);
+        if (!response.Success)
+            return BadRequest(response); // 400
+
+        return Ok(response); // 200
+    }
+
+    [HttpPost("login")]
+    [AllowAnonymous]
+    public async Task<IActionResult> AdminLogin([FromBody] AdminLoginDTO dto)
+    {
+        var token = await _adminService.LoginAdminAsync(dto);
+       //Console.WriteLine(token);
+        if (token == null)
+            return Unauthorized("Invalid email or password.");
+
+        return Ok(new { Token = token });
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAdmin(int id)
+    {
+        var result = await _adminService.DeleteAdminAsync(id);
+
+        if (!result)
+            return NotFound(new { Message = $"Admin with ID {id} not found." });
+
+        return Ok(new { Message = $"Admin with ID {id} deleted successfully." });
+    }
+
+
+    // ───────────────────────────── Election Management ─────────────────────────────
+    [HttpPost("elections")]
+    public async Task<IActionResult> CreateElection([FromBody] ElectionDTO dto)
+    {
+        var response = await _adminService.CreateElectionAsync(dto);
+        if (!response.Success)
+            return BadRequest(response); // 400
+
+        return Ok(response); // 200
+    }
+
+    [HttpPut("elections/{id}")]
+    public async Task<IActionResult> UpdateElection(int id, [FromBody] ElectionDTO dto)
+    {
+        var response  = await _adminService.UpdateElectionAsync(id, dto);
+        if (!response.Success)
+            return BadRequest(response);
+        return Ok(response);
+    }
+
+    ///api/admin/elections/{id}	Delete an election
+    [HttpDelete("elections/{id}")]
+    public async Task<IActionResult> DeleteElection(int id)
+    {
+        var response = await _adminService.DeleteElectionAsync(id);
+        if (!response.Success)
+            return BadRequest(response);
+        return Ok(response);
+    }
+
+
+
+    //------------------------------ADD CANDIDATE-------------------------------
+    [HttpPost("election/{id}/candidate")]
+    public async Task<IActionResult> addCandidate(int id , AddCandidateDTO dto)
+    {
+        var response = await _adminService.AddCandidateAsync(id,dto);
+        if (!response.Success)
+            return BadRequest(response);
+
+        return Ok(response);
+    }
+
+
+    [HttpDelete("election/{election_id}/candidate/{candidate_id}")]
+    public async Task<IActionResult> deleteCandidate(int election_id , int candidate_id)
+    {
+        var response = await _adminService.DeleteCandidateAsync(election_id,candidate_id);
+        if(!response.Success)
+            return BadRequest(response);
+       
+        return Ok(response);
+    }
+    
+
+}

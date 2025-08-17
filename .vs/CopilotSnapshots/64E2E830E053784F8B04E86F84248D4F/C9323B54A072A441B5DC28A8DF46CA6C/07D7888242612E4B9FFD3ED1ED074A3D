@@ -1,0 +1,24 @@
+﻿using E_voting.DTO;
+using E_voting.Model;
+using E_voting.Responses;
+
+namespace E_voting.Service;
+
+public interface IAdminService
+{
+    Task<ApiResponse<AdminRegister>> RegisterAdminAsync(AdminRegister adminDto);
+    Task<string?> LoginAdminAsync(AdminLoginDTO loginDto);
+
+    Task<IEnumerable<Admin>> GetAllAdminsAsync();
+    Task<Admin> GetAdminByIdAsync(int id);
+    Task<bool> DeleteAdminAsync(int id);
+
+
+    Task<ApiResponse<ElectionDTO>> CreateElectionAsync(ElectionDTO dto);
+    Task<ApiResponse<ElectionDTO>> UpdateElectionAsync(int id , ElectionDTO dto);
+    Task<ApiResponse<ElectionDTO>> DeleteElectionAsync(int id);
+    Task<ApiResponse<Candidate>> AddCandidateAsync(int id , AddCandidateDTO dto);
+    Task<ApiResponse<Candidate>> DeleteCandidateAsync(int electionId, int candidate_id);
+
+
+}

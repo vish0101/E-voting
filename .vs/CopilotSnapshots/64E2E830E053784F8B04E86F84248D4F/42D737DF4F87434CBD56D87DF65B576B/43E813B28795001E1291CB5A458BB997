@@ -1,0 +1,9 @@
+﻿namespace E_voting.DTO
+{
+    public class AddCandidateDTO
+    {
+        public string Name { get; set; }
+        public string Party { get; set; }
+        
+    }
+}

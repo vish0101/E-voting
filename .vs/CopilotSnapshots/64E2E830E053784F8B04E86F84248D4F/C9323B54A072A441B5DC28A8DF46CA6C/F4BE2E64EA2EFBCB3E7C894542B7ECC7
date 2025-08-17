@@ -1,0 +1,10 @@
+﻿using E_voting.Model;
+using E_voting.Repository;
+
+namespace E_voting.Service;
+
+public class CandidateService: ICandidateService
+{
+   
+    
+}

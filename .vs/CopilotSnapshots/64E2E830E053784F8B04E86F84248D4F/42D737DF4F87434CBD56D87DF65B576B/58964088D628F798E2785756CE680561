@@ -1,0 +1,102 @@
+﻿using E_voting.DTO;
+using E_voting.Model;
+using E_voting.Repository;
+using E_voting.Responses;
+using Microsoft.EntityFrameworkCore;
+
+namespace E_voting.Service
+{
+    public class ElectionService : IElectionService
+    {
+        private readonly IElectionRepository _electionRepository;
+        private readonly ICandidateRepository _candidateRepository;
+        private readonly IVoteRepository _voteRepository;
+
+        public ElectionService(IElectionRepository electionRepository , ICandidateRepository candidateRepository,IVoteRepository voteRepository)
+        {
+            _electionRepository = electionRepository;
+            _candidateRepository = candidateRepository;
+            _voteRepository = voteRepository;
+        }
+
+
+        public async Task<ApiResponse<List<Election>>> GetAllElectionsAsync()
+        {
+            var electionList = await _electionRepository
+                .GetAll()
+                .Where(e => e.IsActive).ToListAsync();
+
+
+            if (electionList == null || electionList.Count == 0)
+                return new ApiResponse<List<Election>>(false, "no elction active");
+
+            return new ApiResponse<List<Election>>(true, "successfully", electionList);
+
+        }
+        public async Task<ApiResponse<Election>> GetElectionByIdAsync(int id)
+        {
+            var election = await _electionRepository.GetDetailsAsync(id);
+
+
+            if (election == null || election.IsActive==false)
+                return new ApiResponse<Election>(false, "election is inactive or not found");
+
+            return new ApiResponse<Election>(true, "election detail fetch successfull", election);
+
+        }
+
+        public async Task<ApiResponse<List<CandidateListDTO>>> GetCandidateListByElectionIdAsync(int id)
+        {
+            var election = await _electionRepository.GetDetailsAsync(id);
+            if (election == null || !election.IsActive)
+                return new ApiResponse<List<CandidateListDTO>>(false, "election is inactive or not found");
+            
+            var candidates =await _candidateRepository
+                .GetAll()
+                .Where(c => c.ElectionId == id)
+                .Select(c=>new CandidateListDTO
+                {
+                    CandidateId = c.CandidateId,
+                    Name = c.Name,
+                    Party=c.Party,
+                    VoteCount = _voteRepository
+                        .GetAll()
+                        .Count(v => v.CandidateId == c.CandidateId && v.ElectionId == id)
+                }).ToListAsync();
+
+
+            if (!candidates.Any())
+                return new ApiResponse<List<CandidateListDTO>>(false, "No candidates found");
+
+            return new ApiResponse<List<CandidateListDTO>>(true, "Candidates fetched", candidates);
+        }
+
+       
+
+        //public async Task<Election> CreateElectionAsync(ElectionDTO dto)
+        //{
+        //    Election election = new Election
+        //    {
+        //        Title = dto.Title,
+        //        StartDate = dto.StartDate,
+        //        EndDate = dto.EndDate,
+        //    };
+
+        //    int result = await _electionRepository.InsertAsync(election);
+
+        //    throw new NotImplementedException();
+        //}
+
+        //public Task<bool> DeleteElectionAsync(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
+
+        //public Task<bool> UpdateElectionAsync(int id, ElectionDTO dto)
+        //{
+        //    throw new NotImplementedException();
+        //}
+    }
+}
