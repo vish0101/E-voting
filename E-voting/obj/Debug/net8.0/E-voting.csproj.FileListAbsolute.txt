@@ -123,10 +123,4 @@ D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\Microsoft.IdentityMod
 D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
-D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\ClientApp\angular.json
-D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\ClientApp\dist\client-app\prerendered-routes.json
-D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\ClientApp\package-lock.json
-D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\ClientApp\package.json
-D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\ClientApp\tsconfig.app.json
-D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\ClientApp\tsconfig.json
-D:\no need\.NET\project\E-voting\E-voting\bin\Debug\net8.0\ClientApp\tsconfig.spec.json
+D:\no need\.NET\project\E-voting\E-voting\obj\Debug\net8.0\E-voting.sourcelink.json
